@@ -15,7 +15,11 @@ import {
   subWeeks,
   subMonths,
   format,
+  set,
 } from "date-fns";
+
+import { useBreakpoint } from "use-breakpoint";
+
 import { CalendarMonth } from "./CalendarMonth";
 import { CalendarWeek } from "./CalendarWeek";
 import { CalendarDay } from "./CalendarDay";
@@ -33,6 +37,12 @@ const CalendarContext = createContext<CalendarContextData>(
 );
 
 export const CalendarRoot = ({ children }: { children: ReactNode }) => {
+  const { breakpoint } = useBreakpoint({
+    mobile: 0,
+    tablet: 768,
+    desktop: 1024,
+  });
+
   const [date, setDate] = useState<Date>(new Date());
   const [typeNavigation, setTypeNavigation] = useState<
     "month" | "week" | "day"
@@ -75,6 +85,18 @@ export const CalendarRoot = ({ children }: { children: ReactNode }) => {
     console.log(formattedDate);
   }, [date]);
 
+  useEffect(() => {
+    switch (breakpoint) {
+      case "mobile":
+        return setTypeNavigation("day");
+      case "tablet":
+        return setTypeNavigation("week");
+      case "desktop":
+      default:
+        return setTypeNavigation("month");
+    }
+  }, [breakpoint]);
+
   return (
     <CalendarContext.Provider
       value={{
@@ -87,10 +109,15 @@ export const CalendarRoot = ({ children }: { children: ReactNode }) => {
     >
       <div className="w-full">{children}</div>
 
-      {typeNavigation === "month" && <CalendarMonth />}
-      {typeNavigation === "week" && <CalendarWeek />}
+      {breakpoint}
+
+      {(breakpoint === "desktop" || breakpoint === "tablet") &&
+        typeNavigation === "week" && <CalendarWeek />}
+      {breakpoint === "desktop" && typeNavigation === "month" && (
+        <CalendarMonth />
+      )}
       {typeNavigation === "day" && <CalendarDay />}
-      {/* Default => <Calendar.Month /> */}
+      {/* Default => <CalendarMonth /> */}
     </CalendarContext.Provider>
   );
 };
