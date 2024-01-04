@@ -25,14 +25,14 @@ export const CalendarToolbar = ({ children }: CalendarToolbarProps) => {
       <div className="flex flex-col items-center">
         <div className="flex space-x-2">
           <CalendarBtnNavigation
-            onClick={() => onHandlePrev("day")}
+            onClick={() => onHandlePrev()}
             icon={() => <ArrowLeftCircle className="w-4 h-4" />}
           />
 
           <CalendarBtnNavigation onClick={() => onHandleToday()} text="Hoje" />
 
           <CalendarBtnNavigation
-            onClick={() => onHandleNext("day")}
+            onClick={() => onHandleNext()}
             icon={() => <ArrowRightCircle className="w-4 h-4" />}
           />
         </div>

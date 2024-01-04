@@ -33,7 +33,7 @@ export const CalendarRoot = ({ children }: { children: ReactNode }) => {
   const [date, setDate] = useState<Date>(new Date());
   const [typeNavigation, setTypeNavigation] = useState<
     "month" | "week" | "day"
-  >("week");
+  >("month");
 
   const onHandleNext = useCallback(() => {
     setDate((currentDate) => {

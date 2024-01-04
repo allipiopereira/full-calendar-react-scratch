@@ -6,7 +6,7 @@ function App() {
       <div className="px-8 py-8">
         <Calendar.Root>
           <Calendar.Toolbar>
-            <div>Toolbar</div>
+            <Calendar.ToggleNavigation />
           </Calendar.Toolbar>
         </Calendar.Root>
       </div>
