@@ -1,10 +1,15 @@
-import { Button } from "./components/ui/button";
+import { Calendar } from "./components/Calendar";
 
 function App() {
   return (
     <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      <Button>Click me</Button>
+      <div className="px-8 py-8">
+        <Calendar.Root>
+          <Calendar.Toolbar>
+            <div>Toolbar</div>
+          </Calendar.Toolbar>
+        </Calendar.Root>
+      </div>
     </>
   );
 }
