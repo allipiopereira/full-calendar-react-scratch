@@ -1,15 +1,23 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import LogoFCRS from "../LogoFCRS";
 import { CalendarBtnNavigation } from "./CalendarBtnNavigation";
 import { ArrowLeftCircle, ArrowRightCircle } from "lucide-react";
 import { useCalendar } from "./CalendarRoot";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 interface CalendarToolbarProps {
   children: ReactNode;
 }
 
 export const CalendarToolbar = ({ children }: CalendarToolbarProps) => {
-  const { onHandleNext, onHandlePrev, onHandleToday } = useCalendar();
+  const { onHandleNext, onHandlePrev, onHandleToday, date } = useCalendar();
+
+  const [monthName, setMonthName] = useState<string>("");
+
+  useEffect(() => {
+    setMonthName(format(date, "MMMM", { locale: ptBR }));
+  }, [date]);
 
   return (
     <div className="flex justify-between items-center px-4 py-2">
@@ -17,7 +25,9 @@ export const CalendarToolbar = ({ children }: CalendarToolbarProps) => {
         <LogoFCRS width={38} height={38} />
 
         <div className="flex flex-col pl-4">
-          <div className="text-xl font-bold">Janeiro</div>
+          <div className="text-xl font-bold">
+            {monthName.charAt(0).toUpperCase() + monthName.slice(1)}
+          </div>
           <div className="text-xs text-gray-600">04, Qui, 2024</div>
         </div>
       </div>

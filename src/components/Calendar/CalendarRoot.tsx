@@ -15,7 +15,11 @@ import {
   subWeeks,
   subMonths,
   format,
-  set,
+  startOfWeek,
+  endOfMonth,
+  endOfWeek,
+  eachDayOfInterval,
+  parse,
 } from "date-fns";
 
 import { useBreakpoint } from "use-breakpoint";
@@ -30,6 +34,9 @@ interface CalendarContextData {
   onHandleToday: () => void;
   setTypeNavigation: (type: "month" | "week" | "day") => void;
   typeNavigation: "month" | "week" | "day";
+  getDaysInMonth?: () => void;
+  daysInMonth?: Date[];
+  date: Date;
 }
 
 const CalendarContext = createContext<CalendarContextData>(
@@ -47,6 +54,8 @@ export const CalendarRoot = ({ children }: { children: ReactNode }) => {
   const [typeNavigation, setTypeNavigation] = useState<
     "month" | "week" | "day"
   >("month");
+
+  const [daysInMonth, setDaysInMonth] = useState<Date[]>([]);
 
   const onHandleNext = useCallback(() => {
     setDate((currentDate) => {
@@ -81,11 +90,6 @@ export const CalendarRoot = ({ children }: { children: ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    const formattedDate = format(date, "yyyy/MM/dd");
-    console.log(formattedDate);
-  }, [date]);
-
-  useEffect(() => {
     switch (breakpoint) {
       case "mobile":
         return setTypeNavigation("day");
@@ -97,6 +101,32 @@ export const CalendarRoot = ({ children }: { children: ReactNode }) => {
     }
   }, [breakpoint]);
 
+  useEffect(() => {
+    const formattedDate = format(date, "yyyy/MM/dd");
+    console.log(formattedDate);
+  }, [date]);
+
+  const getDaysInMonth = useCallback(() => {
+    let firstDayOfMonth = parse(
+      format(date, "MMM-yyyy"),
+      "MMM-yyyy",
+      new Date()
+    );
+
+    const days = eachDayOfInterval({
+      start: startOfWeek(firstDayOfMonth),
+      end: endOfWeek(endOfMonth(firstDayOfMonth)),
+    });
+
+    setDaysInMonth(days);
+  }, [date]);
+
+  useEffect(() => {
+    if (typeNavigation === "month") {
+      getDaysInMonth();
+    }
+  }, [date, typeNavigation, getDaysInMonth]);
+
   return (
     <CalendarContext.Provider
       value={{
@@ -105,11 +135,12 @@ export const CalendarRoot = ({ children }: { children: ReactNode }) => {
         onHandleToday,
         setTypeNavigation,
         typeNavigation,
+        getDaysInMonth,
+        daysInMonth,
+        date,
       }}
     >
       <div className="w-full">{children}</div>
-
-      {breakpoint}
 
       {(breakpoint === "desktop" || breakpoint === "tablet") &&
         typeNavigation === "week" && <CalendarWeek />}
