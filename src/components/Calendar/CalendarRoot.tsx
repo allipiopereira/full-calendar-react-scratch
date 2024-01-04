@@ -16,6 +16,9 @@ import {
   subMonths,
   format,
 } from "date-fns";
+import { CalendarMonth } from "./CalendarMonth";
+import { CalendarWeek } from "./CalendarWeek";
+import { CalendarDay } from "./CalendarDay";
 
 interface CalendarContextData {
   onHandleNext: () => void;
@@ -83,6 +86,11 @@ export const CalendarRoot = ({ children }: { children: ReactNode }) => {
       }}
     >
       <div className="w-full">{children}</div>
+
+      {typeNavigation === "month" && <CalendarMonth />}
+      {typeNavigation === "week" && <CalendarWeek />}
+      {typeNavigation === "day" && <CalendarDay />}
+      {/* Default => <Calendar.Month /> */}
     </CalendarContext.Provider>
   );
 };
