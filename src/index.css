@@ -77,14 +77,14 @@
 
 @font-face {
   font-family: "Gilroy-Extrabold";
-  src: url("./assets/fonts/Gilroy-Extrabold.otf");
+  src: url("./assets/fonts/GilroyExtrabold.otf");
   font-weight: 800;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "Gilroy-Medium";
-  src: url("./assets/fonts/Gilroy-Medium.ttf");
+  font-family: "Gilroy-Semibold";
+  src: url("./assets/fonts/GilroySemibold.ttf");
   font-weight: 500;
   font-style: normal;
 }
@@ -93,11 +93,11 @@
   font-family: "Gilroy-Extrabold", sans-serif;
 }
 
-.font-gilroy-medium {
-  font-family: "Gilroy-Medium", sans-serif;
+.font-gilroy-semibold {
+  font-family: "Gilroy-Semibold", sans-serif;
 }
 
 html,
 body {
-  font-family: "Gilroy-Medium", sans-serif;
+  font-family: "Gilroy-Semibold", sans-serif;
 }

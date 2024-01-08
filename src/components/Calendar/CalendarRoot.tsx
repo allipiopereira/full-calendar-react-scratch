@@ -27,6 +27,7 @@ import { useBreakpoint } from "use-breakpoint";
 import { CalendarMonth } from "./CalendarMonth";
 import { CalendarWeek } from "./CalendarWeek";
 import { CalendarDay } from "./CalendarDay";
+import { type Event } from "@/types/events";
 
 interface CalendarContextData {
   onHandleNext: () => void;
@@ -37,13 +38,20 @@ interface CalendarContextData {
   getDaysInMonth?: () => void;
   daysInMonth?: Date[];
   date: Date;
+  events: Event[];
 }
 
 const CalendarContext = createContext<CalendarContextData>(
   {} as CalendarContextData
 );
 
-export const CalendarRoot = ({ children }: { children: ReactNode }) => {
+export const CalendarRoot = ({
+  children,
+  events,
+}: {
+  children: ReactNode;
+  events: Event[];
+}) => {
   const { breakpoint } = useBreakpoint({
     mobile: 0,
     tablet: 768,
@@ -138,6 +146,7 @@ export const CalendarRoot = ({ children }: { children: ReactNode }) => {
         getDaysInMonth,
         daysInMonth,
         date,
+        events: events,
       }}
     >
       <div className="w-full">{children}</div>

@@ -32,7 +32,7 @@ export const CalendarToolbar = ({ children }: CalendarToolbarProps) => {
         </div>
       </div>
 
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-end">
         <div className="flex space-x-2">
           <CalendarBtnNavigation
             onClick={() => onHandlePrev()}
