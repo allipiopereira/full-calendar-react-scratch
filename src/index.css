@@ -77,14 +77,14 @@
 
 @font-face {
   font-family: "Gilroy-Extrabold";
-  src: url("./assets/fonts/GilroyExtrabold.otf");
+  src: url("./assets/fonts/GilroyExtrabold.woff2");
   font-weight: 800;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Gilroy-Semibold";
-  src: url("./assets/fonts/GilroySemibold.ttf");
+  src: url("./assets/fonts/GilroySemibold.woff2");
   font-weight: 500;
   font-style: normal;
 }
