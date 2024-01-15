@@ -9,6 +9,16 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
+  "description": "https://full-calendar-react-scratch.vercel.app/",
+  "keywords": [
+    "react",
+    "vite",
+    "typescript",
+    "tailwindcss",
+    "shadcn",
+    "nextjs",
+    "fullcalendar"
+  ],
   "dependencies": {
     "@radix-ui/react-hover-card": "^1.0.7",
     "@radix-ui/react-separator": "^1.0.3",
