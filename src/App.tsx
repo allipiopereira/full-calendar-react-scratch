@@ -7,15 +7,15 @@ function App() {
         <Calendar.Root
           events={[
             {
-              title: "Reunião",
+              title: "Reunião com João",
               date: "2024-01-08",
             },
             {
-              title: "Reunião",
+              title: "Reunião com Gabriel",
               date: "2024-01-10",
             },
             {
-              title: "Reunião",
+              title: "Reunião com Maria",
               date: "2024-01-10",
             },
           ]}

@@ -28,7 +28,21 @@ export const CalendarToolbar = ({ children }: CalendarToolbarProps) => {
           <div className="text-xl font-bold">
             {monthName.charAt(0).toUpperCase() + monthName.slice(1)}
           </div>
-          <div className="text-xs text-gray-600">04, Qui, 2024</div>
+          <div className="flex items-center">
+            <span className="text-xs text-gray-600">{format(date, "dd")},</span>
+
+            <span className="text-xs ml-1">
+              {format(date, "EEEE", { locale: ptBR })
+                .slice(0, 3)
+                .toLowerCase()
+                .replace(/./, (v) => v.toUpperCase())}
+              ,
+            </span>
+
+            <span className="text-xs text-gray-600 ml-1">
+              {format(date, "yyyy")}
+            </span>
+          </div>
         </div>
       </div>
 

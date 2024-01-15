@@ -16,8 +16,14 @@ import {
 } from "@/components/ui/hover-card";
 
 export const CalendarMonth = () => {
-  const { daysInMonth, date, events, onHandleNext, onHandlePrev } =
-    useCalendar();
+  const {
+    daysInMonth,
+    date,
+    events,
+    onHandleNext,
+    onHandlePrev,
+    onHandleSetDate,
+  } = useCalendar();
 
   let firstDayCurrentMonth = parse(
     format(date, "MMM-yyyy"),
@@ -35,6 +41,10 @@ export const CalendarMonth = () => {
     "col-start-6",
     "col-start-7",
   ];
+
+  const selectDay = (day: Date) => {
+    onHandleSetDate(day);
+  };
 
   return (
     <div className="grid grid-cols-7 gap-4 place-items-center">
@@ -96,6 +106,7 @@ export const CalendarMonth = () => {
                   </HoverCard>
                 ) : (
                   <div
+                    onClick={() => selectDay(day)}
                     className={`${
                       colStartClasses[getDay(day)]
                     }  h-20 w-[100px] cursor-pointer flex flex-col px-4 py-4 font-gilroy-extrabold rounded-2xl  select-none hover:text-white ${

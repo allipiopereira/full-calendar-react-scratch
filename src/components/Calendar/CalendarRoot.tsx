@@ -39,6 +39,7 @@ interface CalendarContextData {
   daysInMonth?: Date[];
   date: Date;
   events: Event[];
+  onHandleSetDate: (date: Date) => void;
 }
 
 const CalendarContext = createContext<CalendarContextData>(
@@ -97,6 +98,10 @@ export const CalendarRoot = ({
     setDate(new Date());
   }, []);
 
+  const onHandleSetDate = useCallback((date: Date) => {
+    setDate(date);
+  }, []);
+
   useEffect(() => {
     switch (breakpoint) {
       case "mobile":
@@ -141,6 +146,7 @@ export const CalendarRoot = ({
         onHandleNext,
         onHandlePrev,
         onHandleToday,
+        onHandleSetDate,
         setTypeNavigation,
         typeNavigation,
         getDaysInMonth,
